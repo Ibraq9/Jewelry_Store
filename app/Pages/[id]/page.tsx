@@ -161,14 +161,18 @@ import AllCollection from '@/app/AllCollectionData';
 import RelatedProducts from '@/app/Components/RelatedProducts';
 import { useStore } from '@/app/Context/JewelryContext';
 
-// Updated type definition for Next.js page props
-type ProductPageProps = {
-  params: {
-    id: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
-}
 
+type PageProps = {
+    params: Record<string, string | string[]>;
+    searchParams?: { [key: string]: string | string[] | undefined };
+  };
+
+// Updated type definition for Next.js page props
+type ProductPageProps = PageProps & {
+    params: {
+      id: string;
+    };
+  };
 const ProductPage = ({ params }: ProductPageProps) => {
     const productId = Number(params.id);
     const findProduct = AllCollection.find((product) => product.id === productId);
