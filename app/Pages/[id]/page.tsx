@@ -160,21 +160,18 @@ import { ArrowLeft, CheckCircle, ShoppingCart } from 'lucide-react';
 import AllCollection from '@/app/AllCollectionData';
 import RelatedProducts from '@/app/Components/RelatedProducts';
 import { useStore } from '@/app/Context/JewelryContext';
+import { use } from "react";
 
 
-type PageProps = {
-    params: Record<string, string | string[]>;
-    searchParams?: { [key: string]: string | string[] | undefined };
-  };
 
-// Updated type definition for Next.js page props
-type ProductPageProps = PageProps & {
-    params: {
-      id: string;
-    };
-  };
-const ProductPage = ({ params }: ProductPageProps) => {
-    const productId = Number(params.id);
+    
+
+
+
+
+const ProductPage = ({params}: {params: Promise<{ id: string }>}) => {
+
+    const productId = Number(use(params));
     const findProduct = AllCollection.find((product) => product.id === productId);
     const { Add_to_Cart, cartItems } = useStore();
 
