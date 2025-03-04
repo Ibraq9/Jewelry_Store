@@ -1,6 +1,6 @@
 import React from 'react';
 import Image, { StaticImageData } from "next/image";
-import { useStore } from '../Context/JewelryContext';
+
 
 interface CategoryCardProps {
   ImageSrc: string | StaticImageData;
