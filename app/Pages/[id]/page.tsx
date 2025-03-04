@@ -161,10 +161,12 @@ import AllCollection from '@/app/AllCollectionData';
 import RelatedProducts from '@/app/Components/RelatedProducts';
 import { useStore } from '@/app/Context/JewelryContext';
 
-interface ProductPageProps {
+// Updated type definition for Next.js page props
+type ProductPageProps = {
   params: {
     id: string;
-  }
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 const ProductPage = ({ params }: ProductPageProps) => {
@@ -248,13 +250,6 @@ const ProductPage = ({ params }: ProductPageProps) => {
                                 >
                                     <ShoppingCart className="mr-2 h-5 w-5" />
                                     Add to Cart
-                                </button>
-                               
-                                <button
-                                    className="w-2/3 border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-50 py-3 px-6 rounded-lg font-medium transition-all duration-200"
-                                    type="button"
-                                >
-                                    Buy Now
                                 </button>
                             </div>
                         </div>
