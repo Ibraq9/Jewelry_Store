@@ -67,10 +67,11 @@ const Page = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <div className="flex flex-col lg:flex-row gap-8">
                 {/* Filters Sidebar */}
-                <div className={`lg:w-80 transition-all lg:block`}>
-                  <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                    {/* Category Filter */}
-                    {SHowFilter &&
+                {SHowFilter &&
+                  <div className={`lg:w-80 transition-all lg:block`}>
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                      {/* Category Filter */}
+
                       <div className="mb-8">
                         <h3 className="text-sm font-medium text-gray-700 mb-4 uppercase">Categories</h3>
                         <div className="space-y-3">
@@ -90,9 +91,10 @@ const Page = () => {
                           ))}
                         </div>
                       </div>
-                    }
+
+                    </div>
                   </div>
-                </div>
+                }
 
                 {/* Main Content Area */}
                 <div className="flex-1">
@@ -123,7 +125,7 @@ const Page = () => {
                   </div>
 
                   {/* Products Grid */}
-                  <div className="grid place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
+                  <div className={`grid place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${SHowFilter? 'lg:grid-cols-3':'lg:grid-cols-4'} gap-10`}>
                     {FilterProduct.map((product) => (
                       <ProductCard
                         key={product.id}
