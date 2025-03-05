@@ -46,16 +46,12 @@ const Page = () => {
   }
 
   useEffect(() => {
-    // Create a copy of the original data
     let processedProducts = structuredClone(AllCollectionData);
 
-    // Apply category filter
     processedProducts = CategoryCheck(processedProducts);
 
-    // Apply sorting
     processedProducts = Sort(processedProducts);
 
-    // Update the filtered products state
     setFilterProduct(processedProducts);
   }, [SortType, Category, CategoryCheck, Sort]);
 
@@ -104,9 +100,10 @@ const Page = () => {
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
                     <div className="flex items-center gap-4">
                       <button
-                        className="lg:hidden flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+                        onClick={() => setSHowFilter(e => !e)}
+                        className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
                       >
-                        <span className="font-medium" onClick={() => setSHowFilter(e => !e)}>Filters</span>
+                        <span className="font-medium" >Filters</span>
                       </button>
                     </div>
 
