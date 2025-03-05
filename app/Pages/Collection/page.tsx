@@ -58,8 +58,10 @@ const Page = () => {
   return (
     <div className='flex justify-center mt-10'>
       <div className='w-10/12'>
-        <div className='w-full flex justify-center'>
+        <div className='w-full flex justify-center items-center gap-2'>
+          <div className="w-12 h-px bg-black"></div>
           <h1 className='text-black text-bold text-4xl'>Our Collection</h1>
+          <div className="w-12 h-px bg-black"></div>
         </div>
 
         <div>
@@ -125,7 +127,7 @@ const Page = () => {
                   </div>
 
                   {/* Products Grid */}
-                  <div className={`grid place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${SHowFilter? 'lg:grid-cols-3':'lg:grid-cols-4'} gap-10`}>
+                  <div className={`grid place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${SHowFilter ? 'lg:grid-cols-3' : 'lg:grid-cols-4'} gap-10`}>
                     {FilterProduct.map((product) => (
                       <ProductCard
                         key={product.id}
