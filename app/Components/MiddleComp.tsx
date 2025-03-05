@@ -6,7 +6,7 @@ import Link from 'next/link'
 const MiddleComp = () => {
     return (
         <div className='flex justify-center'>
-            <div className='border-2 border-black/50  lg:w-8/12 flex flex-col lg:flex-row justify-between mt-20 rounded-3xl gap-14'>
+            <div className='border-2 border-black/50 w-full lg:w-8/12 flex flex-col lg:flex-row justify-between mt-20 rounded-3xl gap-14'>
                 {/* Slider Section */}
                 <div className='w-full overflow-hidden'>
                     <ImageSlider />
