@@ -7,7 +7,7 @@ import Sidebar from '../assets/menu_icon.png'
 import Link from 'next/link';
 import Close from '../assets/cross_icon.png';
 import { usePathname } from "next/navigation";
-// import { useStore } from '@/app/Context/JewelryContext';
+
 
 
 
@@ -15,12 +15,6 @@ const NavBar = () => {
 
     const [SideMenu, setSideMenu] = React.useState(false);
     const pathname = usePathname();
-    // const {cartCount } = useStore();
-
-  
-    // const cartCount = React.useMemo(() => {
-    //     return cartItems.reduce((acc, item) => acc + item.quantity, 0);
-    // }, [cartItems]);
 
     return (
         <div className='flex justify-around items-center h-20'>
@@ -76,7 +70,7 @@ const NavBar = () => {
 
                         <Link href={'/Pages/Collection'} onClick={() => setSideMenu(prev => !prev)} className='py-2 pl-6 border'>collections</Link>
 
-                        <Link href={'/Pages/Contact'} onClick={() => setSideMenu(prev => !prev)} className='py-2 pl-6 border'>contact</Link>
+                        <Link href={'/Pages/About'} onClick={() => setSideMenu(prev => !prev)} className='py-2 pl-6 border'>About us</Link>
                     </div>
                 </div>
             </div>

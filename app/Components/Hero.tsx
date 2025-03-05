@@ -20,7 +20,7 @@ const Hero = () => {
             />
             <div className="relative flex items-center justify-center h-full text-white text-3xl font-bold">
                 <div className="max-w-2xl mx-auto px-4 py-20">
-                    {/* Main Heading */}
+                   
                     <h1 className="text-5xl md:text-6xl font-playfair font-bold mb-6 leading-tight">
                         Our Collection
                         <span className="block text-3xl md:text-4xl text-amber-600 mt-3 font-light">
@@ -28,12 +28,12 @@ const Hero = () => {
                         </span>
                     </h1>
 
-                    {/* Description */}
+
                     <p className="text-lg md:text-xl text-slate-400 mb-8 font-light leading-relaxed">
                         Welcome to our curated collection of timeless accessories, where style meets sophistication. Explore our handpicked pieces designed to elevate your everyday look with elegance and charm.
                     </p>
 
-                    {/* CTAs */}
+     
                     <div className="flex flex-col sm:flex-row gap-4 mb-12 justify-center">
                         <Link href="/Pages/Collection">
                             <button
@@ -49,7 +49,6 @@ const Hero = () => {
                         </Link>
                     </div>
 
-                    {/* Accent Text */}
                     <div className="flex items-center gap-4 text-slate-400 justify-center" >
                         <div className="w-12 h-px bg-amber-600"></div>
                         <div className="flex gap-3">

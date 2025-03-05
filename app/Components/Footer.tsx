@@ -3,7 +3,7 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white py-12 mt-20 border-t border-gold-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* About Section */}
+
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-gold-500 mb-4">Luxury Jewels</h3>
             <p className="text-gray-300 text-sm">
@@ -12,11 +12,11 @@ const Footer = () => {
             </p>
           </div>
           
-          {/* Quick Links */}
+         
           <div>
             <h4 className="text-lg font-medium text-gold-500 mb-4">Collections</h4>
             <ul className="space-y-2">
-              {['Ring', 'Bracelets', 'Earrings'].map((item) => (
+              {['Ring', 'Bracelets', 'Earrings','Necklaces'].map((item) => (
                 <li key={item}>
                   <a href="#" className="text-gray-300 hover:text-gold-400 transition-colors text-sm">
                     {item}
@@ -26,7 +26,7 @@ const Footer = () => {
             </ul>
           </div>
           
-          {/* Contact & Social */}
+
           <div>
             <h4 className="text-lg font-medium text-gold-500 mb-4">Connect</h4>
             <div className="flex flex-col gap-2 text-gray-300 text-sm">
@@ -49,7 +49,6 @@ const Footer = () => {
           </div>
         </div>
         
-        {/* Copyright */}
         <div className="mt-12 text-center text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} Luxury Jewels. All rights reserved.</p>
         </div>

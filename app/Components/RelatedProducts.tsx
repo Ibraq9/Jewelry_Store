@@ -21,7 +21,7 @@ const RelatedProducts: React.FC<cat> = ({ Category }) => {
                 <p className='w-8 sm:w-12 h-[1px] sm:h-[2px] bg-gray-700'></p>
             </div>
 
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 mx-3'>
+            <div className='grid place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 mx-3'>
                 {
                     filteredProducts.slice(0, 5).map((item, index) => (
                         <ProductCard

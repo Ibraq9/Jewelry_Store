@@ -1,11 +1,9 @@
 import React from 'react';
-// import ProductCard from './ProductCard';
-// import AllCollection from '../AllCollectionData';
 import Image from 'next/image';
 import I2_100 from '../assets/ProductsImages/90/IMG-20250221-WA0074.jpg'
 import I3_100 from '../assets/ProductsImages/200/WhatsApp Image 2025-02-21 at 07.12.35_70579b9d.jpg';
 import I4_100 from '../assets/ProductsImages/130/WhatsApp Image 2025-02-21 at 07.21.23_984efe5a.jpg'
-// import I5_100 from './assets/ProductsImages/50/IMG-20250221-WA0096.jpg'
+
 
 
 const SomeCollection = () => {
