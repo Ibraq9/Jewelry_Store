@@ -66,7 +66,7 @@ const NavBar = () => {
                         <p>Back</p>
                     </div>
                     <div className="flex flex-col gap-5 m-6">
-                        <Link href={'/Pages'} onClick={() => setSideMenu(prev => !prev)} className='py-2 pl-6 border'>Home</Link>
+                        <Link href={'/'} onClick={() => setSideMenu(prev => !prev)} className='py-2 pl-6 border'>Home</Link>
 
                         <Link href={'/Pages/Collection'} onClick={() => setSideMenu(prev => !prev)} className='py-2 pl-6 border'>collections</Link>
 

@@ -36,7 +36,7 @@ const SomeCollection = () => {
 
 
       <div
-        className="mt-12 relative group cursor-pointer overflow-hidden duration-500 w-80 h-96 bg-zinc-800 text-gray-50 p-5"
+        className="md:mt-12 relative group cursor-pointer overflow-hidden duration-500 w-80 h-96 bg-zinc-800 text-gray-50 p-5"
       >
         <div className="">
           <div

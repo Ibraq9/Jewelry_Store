@@ -4,15 +4,27 @@ import { useStore } from '@/app/Context/JewelryContext';
 import ItemInCart from '@/app/Components/Item_in_Cart';
 import TotalCart from '@/app/Components/TotalCart';
 import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react'
 
 const Page = () => {
   const { cartItems } = useStore();
 
   return (
+
     <div className="p-4">
-      {cartItems.map((item, index) => (
+      {cartItems.length > 0 ? cartItems.map((item, index) => (
         <ItemInCart key={index} ID={item.id} ImageUrl={item.imageUrl} Price={item.Price} Quantity={item.quantity} Category={item.Category} />
-      ))}
+      )) : (<div className='flex gap-5 flex-col justify-center items-center text-bold text-xl  h-44'>
+        <h1>No Items Found.</h1>
+        <Link href={'/Pages/Collection'}>
+          <div className='flex gap-1'>
+            <ArrowLeft className="mr-2" />
+            Back to Collection
+          </div>
+        </Link>
+
+      </div>)
+      }
 
       {cartItems.length > 0 &&
         <div className='flex justify-end w-full'>
@@ -28,7 +40,7 @@ const Page = () => {
                 Check Out
               </Link>
             </div>
-            
+
           </div>
         </div>
       }

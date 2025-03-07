@@ -1,8 +1,10 @@
 "use client"
-import React, { createContext, useState, useCallback, useEffect } from 'react';
+import React, { createContext, useState, useCallback, useEffect, useRef } from 'react';
 import { StaticImageData } from 'next/image';
 import AllCollection from '@/app/AllCollectionData';
-import toast from 'react-hot-toast';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 interface CartItem {
     id: number;
@@ -35,57 +37,80 @@ export const StoreContext = createContext<ContextType>({
 export const StoreProvider = ({ children }: { children: React.ReactNode }) => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [cartCount, setCartCount] = useState<number>(0);
+    // Use ref to avoid state updates during render
+    const isInitialMount = useRef(true);
 
     const Add_to_Cart = (itemID: number) => {
         const findProduct = AllCollection.find((product) => product.id === itemID);
-        if (!findProduct) return;
-
+        if (!findProduct) {
+            return;
+        }
+        let action = '';
         setCartItems(prevItems => {
             const existingItem = prevItems.find(item => item.id === itemID);
             if (existingItem) {
+                action = 'increase';
                 return prevItems.map(item =>
                     item.id === itemID ? { ...item, quantity: item.quantity + 1 } : item
                 );
             }
+            action = 'add';
             return [...prevItems, { ...findProduct, quantity: 1 }];
         });
+
+        if (action === 'increase') {
+            toast.success("Item increased success");
+        } else if (action === 'add') {
+            toast.success("Item added success");
+        }
     };
 
     const UpdateQuantity = (ID: number, Quantity: number) => {
-        setCartItems(prevItems =>
-            Quantity === 0
-                ? prevItems.filter(item => item.id !== ID)  // Remove item if quantity is 0
-                : prevItems.map(item =>
-                    item.id === ID
-                        ? { ...item, quantity: Quantity }  // Update quantity if ID matches
-                        : item  // Keep other items unchanged
-                )
-        );
+
+        const itemExists = cartItems.some(item => item.id === ID);
+        if (!itemExists) return;
+        
+        const currentQuantity = cartItems.find(item => item.id === ID)?.quantity;
+        if (currentQuantity === Quantity) return; 
+        
+        setCartItems(prevItems => {
+        
+            if (Quantity === 0) {
+                const newItems = prevItems.filter(item => item.id !== ID);
+                return newItems;
+            } else {
+                return prevItems.map(item =>
+                    item.id === ID ? { ...item, quantity: Quantity } : item
+                );
+            }
+        });
+        
+        if (Quantity === 0) {
+            toast.success("Item deleted successfully");
+        }
     };
 
-    const get_TotalCart = () => {
-        let total: number = 0;
-        for (const item of cartItems) {
-            if (item.quantity > 0) {
-                total += item.quantity * item.Price;
-            }
-        }
-        return total;
-    }
-
-    const get_Cart_Count = useCallback(() => {
-        const count = cartItems.reduce((total, item) => total + item.quantity, 0);
-        setCartCount(count);
-        return count;
+    const get_TotalCart = useCallback(() => {
+        return cartItems.reduce((total, item) => total + (item.quantity * item.Price), 0);
     }, [cartItems]);
 
+    const get_Cart_Count = useCallback(() => {
+        return cartItems.reduce((total, item) => total + item.quantity, 0);
+    }, [cartItems]);
+
+    // Update cartCount in useEffect, not during render
     useEffect(() => {
-        get_Cart_Count();
-    }, [get_Cart_Count]);
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+            return;
+        }
+        const count = cartItems.reduce((total, item) => total + item.quantity, 0);
+        setCartCount(count);
+    }, [cartItems]);
 
     const value1 = {
-        Add_to_Cart, 
-        cartItems, 
+        Add_to_Cart,
+        cartItems,
         UpdateQuantity,
         get_TotalCart,
         get_Cart_Count,
@@ -102,7 +127,7 @@ export const StoreProvider = ({ children }: { children: React.ReactNode }) => {
 export const useStore = () => {
     const context = React.useContext(StoreContext);
     if (!context) {
-        toast.error("Error");
+        throw new Error("useStore must be used within a StoreProvider");
     }
     return context;
 };

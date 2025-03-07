@@ -2,7 +2,7 @@ import React from 'react';
 import { StaticImageData } from 'next/image';
 import Image from 'next/image';
 import Link from 'next/link';
-import True from '../assets/true.png'
+import {CheckCircle} from 'lucide-react'
 
 
 interface ProductCard {
@@ -20,7 +20,7 @@ const ProductCard: React.FC<ProductCard> = ({ id, ImageUrl, price }) => {
         </div>
 
         <div className='flex gap-2 text-bold mt-2'>
-          <Image priority className='w-5 h-5' src={True} alt='Quality Icon' />
+        <CheckCircle className="h-5 w-5 text-emerald-600 " />
           <p>Pure Stanless Steal</p>
         </div>
 

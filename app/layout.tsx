@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "./Components/NavBar";
 import Footer from './Components/Footer';
+import { ToastContainer } from "react-toastify";
 
 import { StoreProvider } from '@/app/Context/JewelryContext';
 // import { Inter } from 'next/font/google';
@@ -47,14 +48,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-      <html lang="en">
-          <body>
-            <NavBar/>
-              <StoreProvider>
-                  {children}
-              </StoreProvider>
-              <Footer/>
-          </body>
-      </html>
+    <html lang="en">
+      <body>
+        <NavBar />
+        <StoreProvider>
+          {children}
+          <ToastContainer position="bottom-right" autoClose={3000} />
+        </StoreProvider>
+        <Footer />
+      </body>
+    </html>
   );
 }
+
+

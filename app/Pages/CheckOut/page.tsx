@@ -39,7 +39,7 @@ export default function AddressForm() {
     setPhone(numbersOnly);
   };
 
-  // Function to generate the summary link with cart data
+
   const generateSummaryLink = () => {
     const baseUrl = window.location.origin;
     const params = new URLSearchParams({
@@ -48,7 +48,6 @@ export default function AddressForm() {
       phone: phone,
       street: UserData.address.street_name,
       city: UserData.address.city,
-      // Include cart items in the URL
       cart: JSON.stringify(cartItems)
     }).toString();
   
@@ -96,12 +95,8 @@ View full order details: ${summaryLink}`;
     // Create WhatsApp link
     const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     
-    // Open WhatsApp in a new window before navigating to summary
-    // This avoids popup blocking issues
     window.open(whatsappLink, '_blank');
     
-    // Then navigate to the summary page
-    // Use a slight delay to ensure both actions complete
     setTimeout(() => {
       window.location.href = summaryLink;
     }, 300);

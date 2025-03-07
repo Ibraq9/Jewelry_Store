@@ -51,7 +51,6 @@ function OrderSummaryContent() {
       }
     });
 
-    // Handle cart items
     const cartParam = searchParams.get('cart');
     
     if (cartParam) {

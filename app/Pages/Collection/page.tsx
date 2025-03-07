@@ -18,6 +18,8 @@ const Page = () => {
   const [Category, setCategory] = React.useState<string[]>([]);
   const [SHowFilter, setSHowFilter] = React.useState(false);
 
+
+
   const Sort = useCallback((products: FilterProductType[]) => {
     const sortedProducts = [...products];
     if (SortType === 'Low to High') {
