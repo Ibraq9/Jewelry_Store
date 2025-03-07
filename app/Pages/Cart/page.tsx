@@ -17,7 +17,7 @@ const Page = () => {
       )) : (<div className='flex gap-5 flex-col justify-center items-center text-bold text-xl  h-44'>
         <h1>No Items Found.</h1>
         <Link href={'/Pages/Collection'}>
-          <div className='flex gap-1'>
+          <div className='flex gap-1 text-gray-600 hover:text-black'>
             <ArrowLeft className="mr-2" />
             Back to Collection
           </div>
