@@ -14,6 +14,13 @@ interface CartItem {
     Category: string;
 }
 
+interface FilterProductType {
+    id: number;
+    Price: number;
+    imageUrl: StaticImageData;
+    Category: string;
+}
+
 type ContextType = {
     Add_to_Cart: (productId: number) => void;
     cartItems: CartItem[];
@@ -21,6 +28,16 @@ type ContextType = {
     get_TotalCart: () => number;
     get_Cart_Count: () => number,
     cartCount: number,
+    isOwner: boolean,
+    setisOwner: React.Dispatch<React.SetStateAction<boolean>>,
+    Password: string,
+    setPassword: React.Dispatch<React.SetStateAction<string>>,
+    CheckPassword: () => void,
+    AcceptOwner: boolean,
+    setAcceptOwner: React.Dispatch<React.SetStateAction<boolean>>,
+    FilterProduct: FilterProductType[],
+    setFilterProduct: React.Dispatch<React.SetStateAction<FilterProductType[]>>,
+    handleDelete: (ID: number) => void
 };
 
 export const StoreContext = createContext<ContextType>({
@@ -32,13 +49,36 @@ export const StoreContext = createContext<ContextType>({
     get_TotalCart: () => 0,
     get_Cart_Count: () => 0,
     cartCount: 0,
+    isOwner: false,
+    setisOwner: () => { },
+    Password: '',
+    setPassword: () => { },
+    CheckPassword: () => { },
+    AcceptOwner: false,
+    setAcceptOwner: () => { },
+    FilterProduct: [],
+    setFilterProduct: () => { },
+    handleDelete: () => []
 });
 
 export const StoreProvider = ({ children }: { children: React.ReactNode }) => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [cartCount, setCartCount] = useState<number>(0);
-    // Use ref to avoid state updates during render
+    const [isOwner, setisOwner] = useState<boolean>(false);
     const isInitialMount = useRef(true);
+    const [Password, setPassword] = React.useState<string>('');
+    const [AcceptOwner, setAcceptOwner] = React.useState<boolean>(false);
+    const [FilterProduct, setFilterProduct] = React.useState<FilterProductType[]>([]);
+
+
+
+    const CheckPassword = () => {
+        if (Password === 'r***a1') {
+            setAcceptOwner(true);
+        } else {
+            setAcceptOwner(false);
+        }
+    }
 
     const Add_to_Cart = (itemID: number) => {
         const findProduct = AllCollection.find((product) => product.id === itemID);
@@ -69,12 +109,11 @@ export const StoreProvider = ({ children }: { children: React.ReactNode }) => {
 
         const itemExists = cartItems.some(item => item.id === ID);
         if (!itemExists) return;
-        
+
         const currentQuantity = cartItems.find(item => item.id === ID)?.quantity;
-        if (currentQuantity === Quantity) return; 
-        
+        if (currentQuantity === Quantity) return;
+
         setCartItems(prevItems => {
-        
             if (Quantity === 0) {
                 const newItems = prevItems.filter(item => item.id !== ID);
                 return newItems;
@@ -84,7 +123,7 @@ export const StoreProvider = ({ children }: { children: React.ReactNode }) => {
                 );
             }
         });
-        
+
         if (Quantity === 0) {
             toast.success("Item deleted successfully");
         }
@@ -106,7 +145,14 @@ export const StoreProvider = ({ children }: { children: React.ReactNode }) => {
         }
         const count = cartItems.reduce((total, item) => total + item.quantity, 0);
         setCartCount(count);
+
     }, [cartItems]);
+
+
+    const handleDelete = (ID: number) => {
+        const UpdateAllCollection = AllCollection.filter(item => item.id !== ID);
+        setFilterProduct(UpdateAllCollection);
+    }
 
     const value1 = {
         Add_to_Cart,
@@ -114,7 +160,17 @@ export const StoreProvider = ({ children }: { children: React.ReactNode }) => {
         UpdateQuantity,
         get_TotalCart,
         get_Cart_Count,
-        cartCount
+        cartCount,
+        isOwner,
+        setisOwner,
+        CheckPassword,
+        Password,
+        setPassword,
+        AcceptOwner,
+        setAcceptOwner,
+        FilterProduct,
+        setFilterProduct,
+        handleDelete,
     }
 
     return (
@@ -131,3 +187,24 @@ export const useStore = () => {
     }
     return context;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

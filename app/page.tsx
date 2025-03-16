@@ -1,5 +1,5 @@
 // import Image from "next/image";
-import HomePage from './Pages/Home/page';
+import HomePage from './Pages/page';
 
 export default function Home() {
   return (

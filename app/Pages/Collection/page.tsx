@@ -1,11 +1,11 @@
-
 "use client";
 import ProductCard from '@/app/Components/ProductCard'
-import React, { useCallback, useEffect } from 'react';
+import React, { Suspense, useCallback, useEffect } from 'react';
 import AllCollectionData from '@/app/AllCollectionData';
 import { StaticImageData } from 'next/image';
+import { useStore } from '@/app/Context/JewelryContext';
 
-interface FilterProductType {
+interface FilterProduct {
   id: number;
   Price: number;
   imageUrl: StaticImageData;
@@ -13,14 +13,14 @@ interface FilterProductType {
 }
 
 const Page = () => {
-  const [FilterProduct, setFilterProduct] = React.useState<FilterProductType[]>([]);
+  const { FilterProduct, setFilterProduct } = useStore();
   const [SortType, setSortType] = React.useState<string>('');
   const [Category, setCategory] = React.useState<string[]>([]);
   const [SHowFilter, setSHowFilter] = React.useState(false);
 
 
 
-  const Sort = useCallback((products: FilterProductType[]) => {
+  const Sort = useCallback((products: FilterProduct[]) => {
     const sortedProducts = [...products];
     if (SortType === 'Low to High') {
       sortedProducts.sort((a, b) => (a.Price - b.Price));
@@ -30,7 +30,7 @@ const Page = () => {
     return sortedProducts;
   }, [SortType]);
 
-  const CategoryCheck = useCallback((products: FilterProductType[]) => {
+  const CategoryCheck = useCallback((products: FilterProduct[]) => {
     if (Category.length > 0) {
       return products.filter(item =>
         Category.includes(item.Category)
@@ -72,7 +72,7 @@ const Page = () => {
               <div className="flex flex-col lg:flex-row gap-8">
                 {/* Filters Sidebar */}
                 {SHowFilter &&
-                  <div className={`lg:w-80 transition-all lg:block`}>
+                  <div className={`lg:w-70 transition-all lg:block`}>
                     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
                       {/* Category Filter */}
 
@@ -129,16 +129,20 @@ const Page = () => {
                   </div>
 
                   {/* Products Grid */}
-                  <div className={`grid place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${SHowFilter ? 'lg:grid-cols-3' : 'lg:grid-cols-4'} gap-10`}>
-                    {FilterProduct.map((product) => (
-                      <ProductCard
-                        key={product.id}
-                        id={product.id}
-                        ImageUrl={product.imageUrl}
-                        price={product.Price}
-                      />
-                    ))}
+                  <div className={`flex justify-center flex-wrap gap-2`}>
+                    <Suspense>
+                      {FilterProduct.map((product) => (
+
+                        <ProductCard
+                          key={product.id}
+                          id={product.id}
+                          ImageUrl={product.imageUrl}
+                          price={product.Price}
+                        />
+                      ))}
+                    </Suspense>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -150,3 +154,26 @@ const Page = () => {
 }
 
 export default Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

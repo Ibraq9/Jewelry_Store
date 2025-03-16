@@ -216,7 +216,7 @@ import I143 from './assets/ProductsImages/150/WhatsApp Image 2025-02-21 at 07.29
 
 interface Data {
     id: number
-    imageUrl: StaticImageData,
+    imageUrl: StaticImageData ,
     Price: number,
     Size?: string[],
     Category: string,

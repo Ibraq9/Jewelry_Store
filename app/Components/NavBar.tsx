@@ -7,14 +7,16 @@ import Sidebar from '../assets/menu_icon.png'
 import Link from 'next/link';
 import Close from '../assets/cross_icon.png';
 import { usePathname } from "next/navigation";
-
-
+import { useStore } from '../Context/JewelryContext';
 
 
 const NavBar = () => {
 
     const [SideMenu, setSideMenu] = React.useState(false);
     const pathname = usePathname();
+    const {  AcceptOwner } = useStore();
+
+
 
     return (
         <div className='flex justify-around items-center h-20'>
@@ -31,11 +33,19 @@ const NavBar = () => {
                     <hr className="w-2/4 border-none h-[1.5px] bg-black hidden" />
                 </Link>
 
-
                 <Link href={'/Pages/About'} className={`flex flex-col items-center ${pathname === '/Pages/About' ? "active" : ""}`}>
                     <p>About Us</p>
                     <hr className="w-2/4 border-none h-[1.5px] bg-black hidden" />
                 </Link>
+
+                {
+                    AcceptOwner &&
+                    <Link href={'/DashboardPages'}>
+                        <p>Dashboard</p>
+                        <hr className="w-2/4 border-none h-[1.5px] bg-black hidden" />
+                    </Link>
+                }
+
             </ul>
 
             <div className='flex gap-5'>
