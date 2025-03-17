@@ -1,6 +1,6 @@
 "use client";
 import ProductCard from '@/app/Components/ProductCard'
-import React, { Suspense, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import AllCollectionData from '@/app/AllCollectionData';
 import { StaticImageData } from 'next/image';
 import { useStore } from '@/app/Context/JewelryContext';
@@ -59,7 +59,7 @@ const Page = () => {
 
   return (
     <div className='flex justify-center mt-10'>
-      <div className='w-10/12'>
+      <div className='w-full sm:w-10/12'>
         <div className='w-full flex justify-center items-center gap-2'>
           <div className="w-12 h-px bg-black"></div>
           <h1 className='text-black text-bold text-4xl'>Our Collection</h1>
@@ -129,8 +129,8 @@ const Page = () => {
                   </div>
 
                   {/* Products Grid */}
-                  <div className={`flex justify-center flex-wrap gap-2`}>
-                    <Suspense>
+                  <div className={`flex justify-center flex-wrap gap-2 w-full`}>
+
                       {FilterProduct.map((product) => (
 
                         <ProductCard
@@ -140,7 +140,7 @@ const Page = () => {
                           price={product.Price}
                         />
                       ))}
-                    </Suspense>
+                    
                   </div>
 
                 </div>

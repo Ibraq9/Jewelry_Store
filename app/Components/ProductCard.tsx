@@ -14,7 +14,7 @@ const ProductCard: React.FC<ProductCard> = ({ id, ImageUrl, price }) => {
   return (
     <Link
       href={`/Pages/${id}`}
-      className="border-2 border-black rounded-xl overflow-hidden hover:scale-105 transition-transform shadow-lg w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[240px] xl:max-w-[200px] my-5"
+      className="border-2 border-black rounded-xl overflow-hidden hover:scale-105 transition-transform shadow-lg  max-w-[150px]  sm:max-w-[200px] md:max-w-[220px] lg:max-w-[240px] xl:max-w-[200px] my-5"
     >
       <div className="flex flex-col">
         {/* Image Section */}
